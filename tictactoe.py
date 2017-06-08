@@ -34,6 +34,7 @@ class TicTacToeGame():
         self.start_instance = TicTacToeBoard().board
         self.player_x = TicTacToePlayer('x').player
         self.player_o = TicTacToePlayer('o').player
+        self.current_player = ''
 
     def start(self):
         self.game_over = False
@@ -99,16 +100,20 @@ class TicTacToeGame():
         r, c = position
         self.instance[r][c] = marker
 
+    def rotate_player(self):
+        if self.current_player == 'o':
+            self.current_player = 'x'
+        if self.current_player == 'x':
+            self.current_player = 'o'
+
     def main(self):
+        self.current_player = raw_input("Who goes first, x or o? : ")
         while self.check_win() != True:
-            position = raw_input("Enter a position for player x, e.g. 0,2: ").split(",")
+            position = raw_input('Enter a position for player {}, e.g. 0,2: '.format(self.current_player)).split(",")
             position = map(lambda a: int(a), position)
-            self.receive_input(position, self.player_x)
+            self.receive_input(position, self.current_player)
             self.print_board()
-            position = raw_input("Enter a position for player o, e.g. 0,2: ").split(",")
-            position = map(lambda a: int(a), position)
-            self.receive_input(position, self.player_o)
-            self.print_board()
+            self.rotate_player()
 
 if __name__ == '__main__':
     game = TicTacToeGame()
