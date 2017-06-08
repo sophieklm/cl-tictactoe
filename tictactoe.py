@@ -15,6 +15,16 @@ class TicTacToeBoard():
 
         return board
 
+class TicTacToePlayer(object):
+    """
+    Player instance
+    """
+    def __init__(self, marker):
+        self.player = self.__create_player(marker)
+
+    def __create_player(self, marker):
+        return marker
+
 
 class TicTacToeGame():
     """
@@ -22,6 +32,8 @@ class TicTacToeGame():
     """
     def __init__(self):
         self.start_instance = TicTacToeBoard().board
+        self.player_x = TicTacToePlayer('x').player
+        self.player_o = TicTacToePlayer('o').player
 
     def start(self):
         self.game_over = False
@@ -89,10 +101,13 @@ class TicTacToeGame():
 
     def main(self):
         while self.check_win() != True:
-            marker = raw_input("Enter 'x' or 'o': ")
-            position = raw_input("Enter a position, e.g. 0,2: ").split(",")
+            position = raw_input("Enter a position for player x, e.g. 0,2: ").split(",")
             position = map(lambda a: int(a), position)
-            self.receive_input(position, marker)
+            self.receive_input(position, self.player_x)
+            self.print_board()
+            position = raw_input("Enter a position for player o, e.g. 0,2: ").split(",")
+            position = map(lambda a: int(a), position)
+            self.receive_input(position, self.player_o)
             self.print_board()
 
 if __name__ == '__main__':
