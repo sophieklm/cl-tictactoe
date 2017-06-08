@@ -17,7 +17,7 @@ class TicTacToeBoard():
 
 class TicTacToePlayer(object):
     """
-    Player instance
+    Player marker
     """
     def __init__(self, marker):
         self.player = self.__create_player(marker)
