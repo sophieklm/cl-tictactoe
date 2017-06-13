@@ -98,13 +98,16 @@ class TicTacToeGame():
 
     def receive_input(self, position, marker):
         r, c = position
-        self.instance[r][c] = marker
+        if self.instance[r][c] == '.':
+            self.instance[r][c] = marker
+        elif self.instance[r][c] != '.':
+            self.rotate_player()
 
     def rotate_player(self):
-        if self.current_player == 'o':
-            self.current_player = 'x'
-        elif self.current_player == 'x':
-            self.current_player = 'o'
+        if self.current_player == self.player_o:
+            self.current_player = self.player_x
+        elif self.current_player == self.player_x:
+            self.current_player = self.player_o
 
     def main(self):
         self.current_player = raw_input("Who goes first, x or o? : ")
