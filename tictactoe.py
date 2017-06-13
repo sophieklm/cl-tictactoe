@@ -103,7 +103,7 @@ class TicTacToeGame():
     def rotate_player(self):
         if self.current_player == 'o':
             self.current_player = 'x'
-        if self.current_player == 'x':
+        elif self.current_player == 'x':
             self.current_player = 'o'
 
     def main(self):
